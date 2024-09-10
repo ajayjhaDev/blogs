@@ -7,6 +7,7 @@ import {
   Card,
   CardContent,
   Pagination,
+  CardMedia,
 } from "@mui/material";
 import Link from "next/link";
 
@@ -32,23 +33,37 @@ const Blogs = () => {
   };
 
   return (
-    <Container>
-      <Typography variant="h4" component="h1" gutterBottom>
+    <Container sx={{ mt: 4 }}>
+      <Typography
+        variant="h4"
+        component="h1"
+        gutterBottom
+        style={{ display: "flex", justifyContent: "center" }}
+      >
         Blog List
       </Typography>
       <Grid container spacing={4}>
         {blogs.map((blog) => (
           <Grid item xs={12} sm={6} md={4} key={blog.id}>
-            <Card>
+            <Card
+              sx={{ boxShadow: 3, height: "100%" }}
+              style={{ background: "#F2F3F6", color: "#5F5C75" }}
+            >
+              {/* <CardMedia
+                component="img"
+                height="140"
+                image={blog.imageUrl}
+                alt={blog.title}
+              /> */}
               <CardContent>
-                <Typography variant="h5" component="h2">
+                <Typography variant="h5" component="h2" gutterBottom>
                   {blog.title}
                 </Typography>
-                <Typography variant="body2" color="textSecondary">
-                  By {blog.author}
+                <Typography variant="body2" color="textSecondary" gutterBottom>
+                  By {blog.author} | {new Date(blog.createdAt).toDateString()}
                 </Typography>
                 <Typography variant="body2" color="textSecondary">
-                  Created on {new Date(blog.createdAt).toDateString()}
+                  {blog.category}
                 </Typography>
                 <Link href={`/blogs/${blog.id}`} passHref>
                   <Typography variant="body2" color="primary">
